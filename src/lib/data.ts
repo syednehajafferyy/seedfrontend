@@ -60,7 +60,7 @@ export const PRODUCTS: Product[] = [
 ];
 
 export async function getCategories(): Promise<Category[]> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
   if (backendUrl) {
     try {
       const res = await fetch(`${backendUrl}/api/categories`, { next: { revalidate: 60 } });
@@ -76,7 +76,7 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 export async function getProducts(categorySlug?: string): Promise<Product[]> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
   if (backendUrl) {
     try {
       const url = categorySlug
@@ -101,3 +101,4 @@ export async function getProduct(slug: string): Promise<Product | null> {
   const found = products.find((p) => p.slug === slug);
   return found ?? null;
 }
+

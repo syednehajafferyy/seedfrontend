@@ -45,7 +45,7 @@ export async function submitInquiry(_: ContactState, fd: FormData): Promise<Cont
   recent.set(key, Date.now());
 
   // Forward to backend API if configured
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const backendUrl = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
   if (backendUrl) {
     try {
       await fetch(`${backendUrl}/api/inquiries`, {
